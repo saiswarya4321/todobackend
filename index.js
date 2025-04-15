@@ -8,12 +8,21 @@ const cors = require("cors");
 //     credentials: true                 // Allow cookies/auth headers
 // }));
 
-app.use(cors({
-    origin: "http://localhost:5173",  // Allow frontend origin
-    credentials: true,                 // Allow cookies/auth headers
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"] // Allow custom headers
-}));
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://todofrontend-sooty.vercel.app/"
+  ];
+  
+  app.use(cors({
+    origin: function(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true
+  }));
 
 const dotenv=require("dotenv");
 const mongoose=require("mongoose")

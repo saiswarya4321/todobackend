@@ -10,7 +10,7 @@ const cors = require("cors");
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://todofrontend-sooty.vercel.app/"
+    "https://todofrontend-sooty.vercel.app"
   ];
   
   app.use(cors({
